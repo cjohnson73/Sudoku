@@ -60,11 +60,12 @@ public class Solution {
 					}
 				}
 			}
-			/*for(int k = 1; k<10; k++)
+			for(int k = 1; k<10; k++)
 			{
 				for(int i = 0; i<9; i++)//row only can
 				{
 					int r = 0;
+					int in = 0;
 					int rn = 0;
 					for(int j = 0; j<9; j++)
 					{
@@ -73,19 +74,21 @@ public class Solution {
 							r++;
 							rn = j;
 						}
+						if(b[i][j][0]==k)
+							in++;
 					}
-					if(r==1)
+					if(r==1 && in==0)
 					{
 						b[i][rn][0] = k;
 						for(int m = 1; m<10; m++)
 							b[i][rn][m] = 0;
 						changed = true;
-						System.out.println("Only spot in row for can");
 					}
 				}
 				for(int i = 0; i<9; i++)//col only can
 				{
 					int c = 0;
+					int in = 0;
 					int cn = 0;
 					for(int j = 0; j<9; j++)
 					{
@@ -94,14 +97,15 @@ public class Solution {
 							c++;
 							cn = j;
 						}
+						if(b[j][i][0]==k)
+							in++;
 					}
-					if(c==1)
+					if(c==1 && in==0)
 					{
 						b[cn][i][0] = k;
 						for(int m = 1; m<10; m++)
 							b[cn][i][m] = 0;
 						changed = true;
-						System.out.println("Only spot in col for can");
 					}
 				}
 				for(int i = 0; i<9; i+=3)//box only can
@@ -109,6 +113,7 @@ public class Solution {
 					for(int j = 0; j<9; j+=3)
 					{
 						int bo = 0;
+						int in = 0;
 						int sn = 0;
 						for(int s = 0; s<9; s++)
 						{
@@ -117,23 +122,24 @@ public class Solution {
 								bo++;
 								sn = s;								
 							}
+							if(b[i+s%3][j+s/3][0]==k)
+								in++;
 						}
-						if(bo==1)
+						if(bo==1 && in==0)
 						{
 							b[i+sn%3][j+sn/3][0] = k;
 							for(int m = 1; m<10; m++)
 								b[i+sn%3][j+sn/3][m] = 0;
 							changed = true;
-							System.out.println("Only spot in box for can");
 						}
 					}
 				}
-			}*/
+			}
+			
 			solved = tsolved;
 			if(!changed)
 			{
 				solved = true;
-				System.out.println("Unsolvable");
 			}
         }
         
