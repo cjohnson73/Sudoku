@@ -42,12 +42,17 @@ public class Solution {
 								if(b[i-i%3+l%3][j-j%3+l/3][0]==k)
 									can = false;
 							}
-							if(can && b[i][j][k]!=0)
+							if(can && b[i][j][k] != 0)
 							{
 								b[i][j][k] = 1;
 								c++;
 								n = k;
 							}
+							else
+							{
+								b[i][j][k] = 0;
+							}
+								
 						}
 						if(c==1)
 						{	
@@ -94,16 +99,22 @@ public class Solution {
 					{
 						for(int m = 0; m<9; m++)
 						{
-							if((rn-rn%3+m/3)!=srn && (rn-rn%3+m/3)!=rn)
+							if(b[i-i%3+m%3][rn-rn%3+m/3][k] != 0 && (rn-rn%3+m/3)!=srn && (rn-rn%3+m/3)!=rn)
+							{
+								changed = true;
 								b[i-i%3+m%3][rn-rn%3+m/3][k] = 0;
+							}
 						}
 					}
 					if(r==3 && in==0 && (srn-srn%3)==(rn-rn%3) && (rn-rn%3)==(trn-trn%3))
 					{
 						for(int m = 0; m<9; m++)
 						{
-							if((rn-rn%3+m/3)!=srn && (rn-rn%3+m/3)!=trn && (rn-rn%3+m/3)!=rn)
+							if(b[i-i%3+m%3][rn-rn%3+m/3][k] != 0 && (rn-rn%3+m/3)!=srn && (rn-rn%3+m/3)!=trn && (rn-rn%3+m/3)!=rn)
+							{
+								changed = true;
 								b[i-i%3+m%3][rn-rn%3+m/3][k] = 0;
+							}
 						}
 					}//*/
 				}
@@ -137,16 +148,22 @@ public class Solution {
 					{
 						for(int m = 0; m<9; m++)
 						{
-							if((cn-cn%3+m%3)!=scn && (cn-cn%3+m%3)!=cn)
+							if(b[cn-cn%3+m%3][i-i%3+m/3][k] != 0 && (cn-cn%3+m%3)!=scn && (cn-cn%3+m%3)!=cn)
+							{
+								changed = true;
 								b[cn-cn%3+m%3][i-i%3+m/3][k] = 0;
+							}
 						}
 					}
 					if(c==3 && in==0 && (scn-scn%3)==(cn-cn%3) && (scn-scn%3)==(tcn-tcn%3))
 					{
 						for(int m = 0; m<9; m++)
 						{
-							if((cn-cn%3+m%3)!=scn && (cn-cn%3+m%3)!=tcn && (cn-cn%3+m%3)!=cn)
+							if(b[cn-cn%3+m%3][i-i%3+m/3][k] != 0 && (cn-cn%3+m%3)!=scn && (cn-cn%3+m%3)!=tcn && (cn-cn%3+m%3)!=cn)
+							{
+								changed = true;
 								b[cn-cn%3+m%3][i-i%3+m/3][k] = 0;
+							}
 						}
 					}//*/
 				}
@@ -182,32 +199,44 @@ public class Solution {
 						{
 							for(int m = 0; m<9; m++)
 							{
-								if((m-m%3)!=j)
+								if((m-m%3)!=j && b[i+sn%3][m][k] != 0)
+								{
+									changed = true;
 									b[i+sn%3][m][k] = 0;
+								}
 							}
 						}
 						if(bo==3 && in==0 && sn%3==ssn%3 && ssn%3==tsn%3)
 						{
 							for(int m = 0; m<9; m++)
 							{
-								if((m-m%3)!=j)
+								if((m-m%3)!=j && b[i+sn%3][m][k] != 0)
+								{
+									changed = true;
 									b[i+sn%3][m][k] = 0;
+								}
 							}
 						}
 						if(bo==2 && in==0 && sn/3==ssn/3)
 						{
 							for(int m = 0; m<9; m++)
 							{
-								if((m-m%3)!=i)
+								if((m-m%3)!=i && b[m][j+sn/3][k] != 0)
+								{
+									changed = true;
 									b[m][j+sn/3][k] = 0;
+								}
 							}
 						}
 						if(bo==3 && in==0 && sn/3==ssn/3 && tsn/3==ssn/3)
 						{
 							for(int m = 0; m<9; m++)
 							{
-								if((m-m%3)!=i)
+								if((m-m%3)!=i && b[m][j+sn/3][k] != 0)
+								{
+									changed = true;
 									b[m][j+sn/3][k] = 0;
+								}
 							}
 						}//*/
 					}
