@@ -52,7 +52,6 @@ public class Solution {
 							b[i][j][0] = n;
 							b[i][j][n] = 0;
 							changed = true;
-							System.out.println("Only can for spot");
 						}
 					}
 					if(b[i][j][0]==0)
@@ -61,7 +60,7 @@ public class Solution {
 					}
 				}
 			}
-			for(int k = 1; k<10; k++)
+			/*for(int k = 1; k<10; k++)
 			{
 				for(int i = 0; i<9; i++)//row only can
 				{
@@ -129,7 +128,7 @@ public class Solution {
 						}
 					}
 				}
-			}
+			}*/
 			solved = tsolved;
 			if(!changed)
 			{
