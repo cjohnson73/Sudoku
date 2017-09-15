@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.lang.*;
 public class Solution 
 { 
 	static int b[][][] = new int[9][9][10];    
@@ -18,7 +19,7 @@ public class Solution
 		}
 		int a = solve(b);
 		if(a!=0)
-			System.out.println(a==1?"Unsolved":"Impossible");
+			System.out.print(b[i][j][0] + (j%3==2 && j!=8?" || ":" "));
 		else
 		{
 			for(int i = 0; i<9; i++)
@@ -27,7 +28,9 @@ public class Solution
 				{
 					System.out.print(b[i][j][0] + " ");
 				}
-				System.out.println();
+				if(i%3==2 && i!=8)     
+					System.out.println();     
+				System.out.println(i%3==2 && i!=8?"=======================":"");
 			}
 		}
 		cin.close();
