@@ -17,6 +17,7 @@ public class Solution
 				}
 			}
 		}
+		long start = System.currentTimeMillis();
 		int a = solve(b);
 		if(a!=0)
 			System.out.print(b[i][j][0] + (j%3==2 && j!=8?" || ":" "));
@@ -33,6 +34,7 @@ public class Solution
 				System.out.println(i%3==2 && i!=8?"=======================":"");
 			}
 		}
+		System.out.println((System.currentTimeMillis()-Start))+" Milliseconds");
 		cin.close();
 	}
 	public static int solve(int b[][][])
