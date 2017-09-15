@@ -38,7 +38,8 @@ public class Solution
 		while(!solved)
 		{
 			boolean impossible = false;
-			solved = true;   boolean changed = false;
+			solved = true;   
+			boolean changed = false;
 			for(int i = 0; i<9; i++)
 			{
 				for(int j = 0; j<9; j++)
