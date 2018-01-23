@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.lang.*;
 public class Solution
 {
+    static int sols = 1;
 	public static void main(String[] args)
 	{
         int b[][][] = new int[9][9][10];
@@ -23,6 +24,7 @@ public class Solution
             System.out.println("Impossible");
         else
         {
+            System.out.println("#"+sols++);
             for(int i = 0; i<9; i++)
             {
                 for(int j = 0; j<9; j++)
@@ -368,6 +370,7 @@ public class Solution
                     int d = solve(scb);
                     if(d==0)
                     {
+                        System.out.println("#"+sols++);
                         for(int i = 0; i<9; i++)
                         {
                             for(int j = 0; j<9; j++)
