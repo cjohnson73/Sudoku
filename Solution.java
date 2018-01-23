@@ -2,9 +2,9 @@ import java.util.Scanner;
 import java.lang.*;
 public class Solution
 {
-	static int b[][][] = new int[9][9][10];
 	public static void main(String[] args)
 	{
+        int b[][][] = new int[9][9][10];
 		Scanner cin = new Scanner(System.in);
 		for(int i = 0; i<9; i++)
 		{
@@ -19,20 +19,22 @@ public class Solution
 		}
 		long start = System.currentTimeMillis();
 		int a = solve(b);
-		if(a==1)   System.out.println("Impossible");
-		else
-		{
-			for(int i = 0; i<9; i++)
-			{
-				for(int j = 0; j<9; j++)
-				{
-					System.out.print(b[i][j][0] + (j%3==2 && j!=8?" || ":" "));
-				}
-				if(i%3==2 && i!=8)
-					System.out.println();
-				System.out.println(i%3==2 && i!=8?"=======================":"");
-			}
-		}
+        if(a==1)
+            System.out.println("Impossible");
+        else
+        {
+            for(int i = 0; i<9; i++)
+            {
+                for(int j = 0; j<9; j++)
+                {
+                    System.out.print(b[i][j][0] + (j%3==2 && j!=8?" || ":" "));
+                }
+                if(i%3==2 && i!=8)
+                    System.out.println();
+                System.out.println(i%3==2 && i!=8?"=======================":"");
+            }
+            System.out.println();
+        }
 		System.out.println((System.currentTimeMillis()-start)+" Milliseconds");
 		cin.close();
 	}
@@ -116,12 +118,12 @@ public class Solution
 						if(b[i][j][0]==k)
 							in++;
 					}
-					if(in>1)
+                    if(in>1)
 					{
-						impossible = true;//same number in row more than once  
+						impossible = true;//same number in row more than once
 						break;
 					}
-					else if(in==1) // if cand already in row then tell row than none will be k 
+					else if(in==1) // if cand already in row then tell row than none will be k
 					{
 						for(int j = 0; j<9; j++)
 							b[i][j][k]=0;
@@ -133,9 +135,9 @@ public class Solution
 							b[i][rn][m] = 0;
 						changed = true;
 					}
-					else if(r==2 && (srn-srn%3)==(rn-rn%3))//if in a row, k is a cand in 2 places and they're in the same box      
+					else if(r==2 && (srn-srn%3)==(rn-rn%3))//if in a row, k is a cand in 2 places and they're in the same box
 					{
-						//tell the rest of the box that they wont have k  
+						//tell the rest of the box that they wont have k
 						for(int m = 0; m<9; m++)
 						{
 							if(b[i-i%3+m%3][rn-rn%3+m/3][k] != 0 && (rn-rn%3+m/3)!=srn && (rn-rn%3+m/3)!=rn)
@@ -145,28 +147,28 @@ public class Solution
 							}
 						}
 					}
-					else if(r==3 && (srn-srn%3)==(rn-rn%3) && (rn-rn%3)==(trn-trn%3)) // same as previous but with 3 spots in same box        
+					else if(r==3 && (srn-srn%3)==(rn-rn%3) && (rn-rn%3)==(trn-trn%3)) // same as previous but with 3 spots in same box
 					{
 						for(int m = 0; m<9; m++)
 						{
-							if(b[i-i%3+m%3][rn-rn%3+m/3][k] != 0 && (rn-rn%3+m/3)!=srn && (rn-rn%3+m/3)!=trn && (rn-rn%3+m/3)!=rn)         
+							if(b[i-i%3+m%3][rn-rn%3+m/3][k] != 0 && (rn-rn%3+m/3)!=srn && (rn-rn%3+m/3)!=trn && (rn-rn%3+m/3)!=rn)
 							{
-								changed = true;  
-								b[i-i%3+m%3][rn-rn%3+m/3][k] = 0;   
+								changed = true;
+								b[i-i%3+m%3][rn-rn%3+m/3][k] = 0;
 							}
 						}
-					}//*/      
+					}//*/
 				}
-				for(int i = 0; i<9; i++)//similar to previous but for columns 
+				for(int i = 0; i<9; i++)//similar to previous but for columns
 				{
-					int c = 0; 
-					int in = 0;  
-					int tcn = 0;   
-					int scn = 0; 
-					int cn = 0;  
-					for(int j = 0; j<9; j++)  
+					int c = 0;
+					int in = 0;
+					int tcn = 0;
+					int scn = 0;
+					int cn = 0;
+					for(int j = 0; j<9; j++)
 					{
-						if(b[j][i][k]==1)   
+						if(b[j][i][k]==1)
 						{
 							c++;
 							tcn = scn;
@@ -179,25 +181,25 @@ public class Solution
 					if(in>1)
 					{
 						impossible = true;
-						break; 
+						break;
 					}
-					else if(in==1) 
+					else if(in==1)
 					{
-						for(int j = 0; j<9; j++) 
-							b[j][i][k]=0; 
+						for(int j = 0; j<9; j++)
+							b[j][i][k]=0;
 					}
 					else if(c==1)
 					{
-						b[cn][i][0] = k;  
-						for(int m = 1; m<10; m++) 
+						b[cn][i][0] = k;
+						for(int m = 1; m<10; m++)
 							b[cn][i][m] = 0;
-						changed = true;  
+						changed = true;
 					}
-					else if(c==2 && (scn-scn%3)==(cn-cn%3)) 
+					else if(c==2 && (scn-scn%3)==(cn-cn%3))
 					{
 						for(int m = 0; m<9; m++)
 						{
-							if(b[cn-cn%3+m%3][i-i%3+m/3][k] != 0 && (cn-cn%3+m%3)!=scn && (cn-cn%3+m%3)!=cn)       
+							if(b[cn-cn%3+m%3][i-i%3+m/3][k] != 0 && (cn-cn%3+m%3)!=scn && (cn-cn%3+m%3)!=cn)
 							{
 								changed = true;
 								b[cn-cn%3+m%3][i-i%3+m/3][k] = 0;
@@ -206,171 +208,191 @@ public class Solution
 					}
 					else if(c==3 && (scn-scn%3)==(cn-cn%3) && (scn-scn%3)==(tcn-tcn%3))
 					{
-						for(int m = 0; m<9; m++)  
+						for(int m = 0; m<9; m++)
 						{
-							if(b[cn-cn%3+m%3][i-i%3+m/3][k] != 0 && (cn-cn%3+m%3)!=scn && (cn-cn%3+m%3)!=tcn && (cn-cn%3+m%3)!=cn)              
+							if(b[cn-cn%3+m%3][i-i%3+m/3][k] != 0 && (cn-cn%3+m%3)!=scn && (cn-cn%3+m%3)!=tcn && (cn-cn%3+m%3)!=cn)
 							{
 								changed = true;
-								b[cn-cn%3+m%3][i-i%3+m/3][k] = 0;    
+								b[cn-cn%3+m%3][i-i%3+m/3][k] = 0;
 							}
 						}
-					}//*/  
+					}//*/
 				}
-				for(int i = 0; i<9; i+=3)//same as aboce 2 but for boxes  
+				for(int i = 0; i<9; i+=3)//same as aboce 2 but for boxes
 				{
 					for(int j = 0; j<9; j+=3)
 					{
-						int bo = 0;    
-						int in = 0;  
-						int tsn = 0;  
-						int ssn = 0;  
-						int sn = 0;   
-						for(int s = 0; s<9; s++)     
+						int bo = 0;
+						int in = 0;
+						int tsn = 0;
+						int ssn = 0;
+						int sn = 0;
+						for(int s = 0; s<9; s++)
 						{
-							if(b[i+s%3][j+s/3][k]==1)   
+							if(b[i+s%3][j+s/3][k]==1)
 							{
-								bo++;      
-								tsn = ssn;    
-								ssn = sn;    
-								sn = s;    
+								bo++;
+								tsn = ssn;
+								ssn = sn;
+								sn = s;
 							}
-							if(b[i+s%3][j+s/3][0]==k)    
-								in++; 
+							if(b[i+s%3][j+s/3][0]==k)
+								in++;
 						}
-						if(in>1)   
-						{ 
+						if(in>1)
+						{
 							impossible = true;
 							break;
 						}
-						else if(in==1)   
+						else if(in==1)
 						{
 							for(int s = 0; s<9; s++)
-								b[i+s%3][j+s/3][k]=0; 
+								b[i+s%3][j+s/3][k]=0;
 						}
-						else if(bo==1 && in==0)   
+						else if(bo==1 && in==0)
 						{
-							b[i+sn%3][j+sn/3][0] = k;   
+							b[i+sn%3][j+sn/3][0] = k;
 							for(int m = 1; m<10; m++)
-								b[i+sn%3][j+sn/3][m] = 0; 
-							changed = true;  
+								b[i+sn%3][j+sn/3][m] = 0;
+							changed = true;
 						}
-						else if(bo==2 && sn%3==ssn%3) 
+						else if(bo==2 && sn%3==ssn%3)
 						{
-							for(int m = 0; m<9; m++)   
+							for(int m = 0; m<9; m++)
 							{
-								if((m-m%3)!=j && b[i+sn%3][m][k] != 0)  
+								if((m-m%3)!=j && b[i+sn%3][m][k] != 0)
 								{
-									changed = true; 
-									b[i+sn%3][m][k] = 0; 
-								}
-							}
-						}
-						else if(bo==3 && sn%3==ssn%3 && ssn%3==tsn%3) 
-						{
-							for(int m = 0; m<9; m++) 
-							{
-								if((m-m%3)!=j && b[i+sn%3][m][k] != 0)   
-								{
-									changed = true;     
-									b[i+sn%3][m][k] = 0;  
+									changed = true;
+									b[i+sn%3][m][k] = 0;
 								}
 							}
 						}
-						else if(bo==2 && sn/3==ssn/3)  
+						else if(bo==3 && sn%3==ssn%3 && ssn%3==tsn%3)
 						{
-							for(int m = 0; m<9; m++)     
+							for(int m = 0; m<9; m++)
 							{
-								if((m-m%3)!=i && b[m][j+sn/3][k] != 0)   
+								if((m-m%3)!=j && b[i+sn%3][m][k] != 0)
 								{
-									changed = true;     
-									b[m][j+sn/3][k] = 0;       
+									changed = true;
+									b[i+sn%3][m][k] = 0;
 								}
 							}
-						} 
-						else if(bo==3 && sn/3==ssn/3 && tsn/3==ssn/3)    
+						}
+						else if(bo==2 && sn/3==ssn/3)
 						{
-							for(int m = 0; m<9; m++)   
+							for(int m = 0; m<9; m++)
 							{
-								if((m-m%3)!=i && b[m][j+sn/3][k] != 0)    
+								if((m-m%3)!=i && b[m][j+sn/3][k] != 0)
 								{
-									changed = true;     
-									b[m][j+sn/3][k] = 0;    
+									changed = true;
+									b[m][j+sn/3][k] = 0;
 								}
 							}
-						}//*/  
+						}
+						else if(bo==3 && sn/3==ssn/3 && tsn/3==ssn/3)
+						{
+							for(int m = 0; m<9; m++)
+							{
+								if((m-m%3)!=i && b[m][j+sn/3][k] != 0)
+								{
+									changed = true;
+									b[m][j+sn/3][k] = 0;
+								}
+							}
+						}//*/
 					}
 				}
 			}
-			if(impossible)  
+			if(impossible)
 			{
-				return 1;   
+				return 1;
 			}
-			if(!changed && !solved)   
+			if(!changed && !solved)
 			{
-				int cb[][][] = new int[9][9][10];
-				boolean cangot = false; 
-				int ican = 0; 
-				int jcan = 0; 
-				int kcan = 0;   
-				for(int i = 0; i<9; i++)   
+                int cb[][][] = new int[9][9][10];
+                int scb[][][] = new int[9][9][10];
+				boolean cangot = false;
+				int ican = 0;
+				int jcan = 0;
+				int kcan = 0;
+				for(int i = 0; i<9; i++)
 				{
-					for(int j = 0; j<9; j++)  
-					{              
-						for(int k = 0; k<10; k++)  
-							cb[i][j][k] = b[i][j][k];  
-					}
-				}
-				for(int i = 0; i<9; i++)   
-				{
-					for(int j = 0; j<9; j++)   
+					for(int j = 0; j<9; j++)
 					{
-						for(int k = 1; k<10; k++)     
+						for(int k = 0; k<10; k++)
+                        {
+                            cb[i][j][k] = b[i][j][k];
+                            scb[i][j][k] = b[i][j][k];
+                        }
+                    }
+				}
+				for(int i = 0; i<9; i++)
+				{
+					for(int j = 0; j<9; j++)
+					{
+						for(int k = 1; k<10; k++)
 						{
-							if(cb[i][j][k]==1 && cb[i][j][0]==0)  
+							if(cb[i][j][k]==1 && cb[i][j][0]==0)
 							{
-								cb[i][j][0] = k; 
-								for(int m = 1; m<10; m++)   
-									cb[i][j][m] = 0;   
-								ican = i;            
-								jcan = j;     
-								kcan = k;    
-								cangot = true;   
-								break;     
-							} 
+								cb[i][j][0] = k;
+								for(int m = 1; m<10; m++)
+									cb[i][j][m] = 0;
+								ican = i;
+								jcan = j;
+								kcan = k;
+								cangot = true;
+								break;
+							}
 						}
-						if(cangot)    
-							break;   
-					}  
-					if(cangot)   
+						if(cangot)
+							break;
+					}
+					if(cangot)
 						break;
 				}
-				if(!cangot)  
-					return 1; 
-				int a = solve(cb);  
-				if(a==0) 
+				if(!cangot)
+					return 1;
+				int a = solve(cb);
+				if(a==0)
 				{
 					solved = true;
-					for(int i = 0; i<9; i++) 
+					for(int i = 0; i<9; i++)
 					{
-						for(int j = 0; j<9; j++)    
+						for(int j = 0; j<9; j++)
 						{
-							for(int k = 0; k<10; k++)   
-								b[i][j][k] = cb[i][j][k]; 
+							for(int k = 0; k<10; k++)
+								b[i][j][k] = cb[i][j][k];
 						}
 					}
-					break;  
+                    scb[ican][jcan][kcan] = 0;
+                    int d = solve(scb);
+                    if(d==0)
+                    {
+                        for(int i = 0; i<9; i++)
+                        {
+                            for(int j = 0; j<9; j++)
+                            {
+                                System.out.print(scb[i][j][0] + (j%3==2 && j!=8?" || ":" "));
+                            }
+                            if(i%3==2 && i!=8)
+                                System.out.println();
+                            System.out.println(i%3==2 && i!=8?"=======================":"");
+                        }
+                        System.out.println();
+                    }
+					break;
 				}
-				else 
+				else
 				{
-					b[ican][jcan][kcan] = 0;   
-				}
-				//make clone    
-				//change clone to test cand 
+					b[ican][jcan][kcan] = 0;
+                }
+				//make clone
+				//change clone to test cand
 				//if solved return solved with clone
-				//else repeat  
+				//else repeat
 			}
-		} 
-		return 0; 
+		}
+		return 0;
 	}
 }
 /*
@@ -386,13 +408,13 @@ public class Solution
 
 8 0 0 0 0 0 0 0 0
 0 0 3 6 0 0 0 0 0
-0 7 0 0 9 0 2 0 0 
-0 5 0 0 0 7 0 0 0 
-0 0 0 0 4 5 7 0 0 
-0 0 0 1 0 0 0 3 0 
+0 7 0 0 9 0 2 0 0
+0 5 0 0 0 7 0 0 0
+0 0 0 0 4 5 7 0 0
+0 0 0 1 0 0 0 3 0
 0 0 1 0 0 0 0 6 8
-0 0 8 5 0 0 0 1 0 
-0 9 0 0 0 0 4 0 0 
+0 0 8 5 0 0 0 1 0
+0 9 0 0 0 0 4 0 0
 
 7 8 0 0 0 0 5 0 0
 0 0 0 0 1 0 0 0 4
