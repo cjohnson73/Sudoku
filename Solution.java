@@ -6,7 +6,10 @@ public class Solution
 	public static void main(String[] args)
 	{
         int b[][][] = new int[9][9][10];
+        boolean all = true;
 		Scanner cin = new Scanner(System.in);
+        if(cin.nextInt()==0)
+            all = false;
 		for(int i = 0; i<9; i++)
 		{
 			for(int j = 0; j<9; j++)
@@ -19,7 +22,7 @@ public class Solution
 			}
 		}
 		long start = System.currentTimeMillis();
-		int a = solve(b);
+		int a = solve(b, all);
         if(a==1)
             System.out.println("Impossible");
         else
@@ -40,7 +43,7 @@ public class Solution
 		System.out.println((System.currentTimeMillis()-start)+" Milliseconds");
 		cin.close();
 	}
-	public static int solve(int b[][][])
+	public static int solve(int b[][][], boolean all)
 	{
 		boolean solved = false;
 		while(!solved)
@@ -354,7 +357,7 @@ public class Solution
 				}
 				if(!cangot)
 					return 1;
-				int a = solve(cb);
+				int a = solve(cb, all);
 				if(a==0)
 				{
 					solved = true;
@@ -366,22 +369,25 @@ public class Solution
 								b[i][j][k] = cb[i][j][k];
 						}
 					}
-                    scb[ican][jcan][kcan] = 0;
-                    int d = solve(scb);
-                    if(d==0)
+                    if(all)
                     {
-                        System.out.println("#"+sols++);
-                        for(int i = 0; i<9; i++)
+                        scb[ican][jcan][kcan] = 0;
+                        int d = solve(scb, all);
+                        if(d==0)
                         {
-                            for(int j = 0; j<9; j++)
+                            System.out.println("#"+sols++);
+                            for(int i = 0; i<9; i++)
                             {
-                                System.out.print(scb[i][j][0] + (j%3==2 && j!=8?" || ":" "));
+                                for(int j = 0; j<9; j++)
+                                {
+                                    System.out.print(scb[i][j][0] + (j%3==2 && j!=8?" || ":" "));
+                                }
+                                if(i%3==2 && i!=8)
+                                    System.out.println();
+                                System.out.println(i%3==2 && i!=8?"=======================":"");
                             }
-                            if(i%3==2 && i!=8)
-                                System.out.println();
-                            System.out.println(i%3==2 && i!=8?"=======================":"");
+                            System.out.println();
                         }
-                        System.out.println();
                     }
 					break;
 				}
@@ -399,6 +405,7 @@ public class Solution
 	}
 }
 /*
+0
 0 2 0 0 8 4 0 0 0
 0 0 0 0 5 0 8 0 7
 0 7 3 0 0 0 0 0 0
@@ -409,6 +416,7 @@ public class Solution
 7 0 6 0 1 0 0 0 0
 0 0 0 5 4 0 0 6 0
 
+0
 8 0 0 0 0 0 0 0 0
 0 0 3 6 0 0 0 0 0
 0 7 0 0 9 0 2 0 0
@@ -419,6 +427,18 @@ public class Solution
 0 0 8 5 0 0 0 1 0
 0 9 0 0 0 0 4 0 0
 
+1
+8 0 0 0 0 0 0 0 0
+0 0 3 6 0 0 0 0 0
+0 7 0 0 9 0 2 0 0
+0 5 0 0 0 0 0 0 0
+0 0 0 0 4 5 7 0 0
+0 0 0 1 0 0 0 3 0
+0 0 1 0 0 0 0 6 8
+0 0 8 5 0 0 0 1 0
+0 9 0 0 0 0 4 0 0
+
+0
 7 8 0 0 0 0 5 0 0
 0 0 0 0 1 0 0 0 4
 0 0 0 0 0 0 0 0 0
