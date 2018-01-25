@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.lang.*;
 public class Solution
 {
-    static int sols = 1;
+    	static int sols = 0;
 	public static void main(String[] args)
 	{
         int b[][][] = new int[9][9][10];
@@ -27,7 +27,8 @@ public class Solution
             System.out.println("Impossible");
         else
         {
-            System.out.println("#"+sols++);
+	    sols++;
+            System.out.println("#"+sols);
             for(int i = 0; i<9; i++)
             {
                 for(int j = 0; j<9; j++)
@@ -39,9 +40,14 @@ public class Solution
                 System.out.println(i%3==2 && i!=8?"=======================":"");
             }
             System.out.println();
+	    if(all)
+	    {
+		    System.out.println("# of Solutions: " + sols);
+		    System.out.println();
+	    }
         }
-		System.out.println((System.currentTimeMillis()-start)+" Milliseconds");
-		cin.close();
+	System.out.println((System.currentTimeMillis()-start)+" Milliseconds");
+	cin.close();
 	}
 	public static int solve(int b[][][], boolean all)
 	{
@@ -96,7 +102,7 @@ public class Solution
 							break;
 						}
 					}
-					if(b[i][j][0]==0)
+						if(b[i][j][0]==0)
 					{
 						solved = false;
 					}
@@ -123,7 +129,7 @@ public class Solution
 						if(b[i][j][0]==k)
 							in++;
 					}
-                    if(in>1)
+                    			if(in>1)
 					{
 						impossible = true;//same number in row more than once
 						break;
@@ -349,9 +355,7 @@ public class Solution
 								break;
 							}
 						}
-						if(cangot)
-							break;
-					}
+						if(cangot)							break;					}
 					if(cangot)
 						break;
 				}
@@ -375,7 +379,8 @@ public class Solution
                         int d = solve(scb, all);
                         if(d==0)
                         {
-                            System.out.println("#"+sols++);
+			    sols++;
+                            System.out.println("#"+sols);
                             for(int i = 0; i<9; i++)
                             {
                                 for(int j = 0; j<9; j++)
